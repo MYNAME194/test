@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大鸡鸡娱乐</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* 导航栏 */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* 登录按钮 */
+        .login-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* 登录弹窗 */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .login-modal h2 {
+            margin-top: 0;
+        }
+
+        .login-modal input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-modal button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .login-modal button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 遮罩层 */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* 内容区域 */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        section p {
+            line-height: 1.6;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <h1>大鸡鸡</h1>
+        <nav>
+            <a href="#home">首页</a>
+            <a href="#about">关于我们</a>
+            <a href="#services">服务</a>
+            <a href="#contact">联系我们</a>
+        </nav>
+        <button class="login-btn" onclick="openLoginModal()">登录</button>
+    </header>
+
+    <!-- 登录弹窗 -->
+    <div class="overlay" id="overlay"></div>
+    <div class="login-modal" id="loginModal">
+        <h2>用户登录</h2>
+        <form id="loginForm">
+            <input type="text" placeholder="用户名" required>
+            <input type="password" placeholder="密码" required>
+            <button type="submit">登录</button>
+        </form>
+        <button onclick="closeLoginModal()" style="margin-top: 10px; background-color: #ccc;">关闭</button>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="container">
+        <section id="home">
+            <h2>欢迎来到我们公司</h2>
+            <p>我们是一家致力于提供优质服务的公司，专注于创新和客户满意度。</p>
+        </section>
+
+        <section id="about">
+            <h2>关于我们</h2>
+            <p>我们拥有多年的行业经验，致力于为客户提供最优质的产品和服务。</p>
+        </section>
+
+        <section id="services">
+            <h2>我们的服务</h2>
+            <p>我们提供以下服务：</p>
+            <ul>
+                <li>服务 1</li>
+                <li>服务 2</li>
+                <li>服务 3</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>联系我们</h2>
+            <p>如有任何问题，请通过以下方式联系我们：</p>
+            <p>电话：123-456-7890</p>
+            <p>邮箱：info@company.com</p>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2023 公司名称. 保留所有权利。</p>
+    </footer>
+
+    <script>
+        // 打开登录弹窗
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        // 关闭登录弹窗
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // 登录表单提交
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('登录成功！');
+            closeLoginModal();
+        });
+    </script>
+</body>
+</html>
+
